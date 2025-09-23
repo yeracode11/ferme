@@ -1,0 +1,228 @@
+[
+{
+  "model": "menu.menuitem",
+  "pk": 4,
+  "fields": {
+    "name": "Манты 1 шт.",
+    "description": "Продукты: яйца, вода, масло растительное, соль, мука, фарш мясной, лук репчатый, чеснок, соль, перец чёрный молотый, лук репчатый, помидоры, сметана, вода",
+    "category": "second",
+    "price": "250.00",
+    "image": "menu_images/манты.jpeg",
+    "available": true,
+    "created_at": "2025-09-13T12:08:45.127Z",
+    "updated_at": "2025-09-22T11:28:54.023Z"
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 6,
+  "fields": {
+    "name": "Мясо по тайский",
+    "description": "обжаренная говядина с овощами в ароматном соевом соусе с пряностями.",
+    "category": "second",
+    "price": "1400.00",
+    "image": "menu_images/taiski.jpg",
+    "available": true,
+    "created_at": "2025-09-22T11:40:01.710Z",
+    "updated_at": "2025-09-22T11:48:13.238Z"
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 7,
+  "fields": {
+    "name": "Курица в сливочном соусе (фрикассе)",
+    "description": "нежное куриное филе в густом сливочном соусе с луком и морковью.",
+    "category": "second",
+    "price": "1700.00",
+    "image": "menu_images/frikase.jpg",
+    "available": true,
+    "created_at": "2025-09-22T11:47:51.955Z",
+    "updated_at": "2025-09-22T11:47:51.955Z"
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 8,
+  "fields": {
+    "name": "Гуляш из говядины",
+    "description": "тушёная говядина в томатном соусе с луком и специями.",
+    "category": "second",
+    "price": "1700.00",
+    "image": "menu_images/gulyash.jpg",
+    "available": true,
+    "created_at": "2025-09-22T11:50:08.305Z",
+    "updated_at": "2025-09-22T11:50:08.305Z"
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 9,
+  "fields": {
+    "name": "Чахохбили (окорачка рубленная в том соусе)",
+    "description": "сочные куриные кусочки, тушёные в насыщенном томатном соусе с луком и чесноком.",
+    "category": "second",
+    "price": "1700.00",
+    "image": "menu_images/срфрщришдш.webp",
+    "available": true,
+    "created_at": "2025-09-22T11:51:54.084Z",
+    "updated_at": "2025-09-22T11:55:16.962Z"
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 10,
+  "fields": {
+    "name": "Куриная ножка запеченная",
+    "description": "румяная куриная ножка, запечённая со специями до золотистой корочки.",
+    "category": "second",
+    "price": "1700.00",
+    "image": "menu_images/kur-nozhka.jpg",
+    "available": true,
+    "created_at": "2025-09-22T11:56:57.923Z",
+    "updated_at": "2025-09-22T11:56:57.923Z"
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 11,
+  "fields": {
+    "name": "Куриная ножка отварная",
+    "description": "куриная ножка, приготовленная на пару с солью и лёгкими специями.",
+    "category": "second",
+    "price": "1700.00",
+    "image": "menu_images/щемфк-тщярлф.jpg",
+    "available": true,
+    "created_at": "2025-09-22T12:27:29.008Z",
+    "updated_at": "2025-09-22T12:27:29.008Z"
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 12,
+  "fields": {
+    "name": "Ганфан",
+    "description": "мясо с овощами в соусе, поданное с рисом по восточному рецепту.",
+    "category": "second",
+    "price": "1700.00",
+    "image": "menu_images/ganfan.jpg",
+    "available": true,
+    "created_at": "2025-09-22T12:28:54.170Z",
+    "updated_at": "2025-09-22T12:28:54.170Z"
+  }
+},
+{
+  "model": "menu.order",
+  "pk": 1,
+  "fields": {
+    "name": "Yersultan Tulemis",
+    "phone": "+77776442004",
+    "address": "33125\nTurquoise Lane",
+    "comment": "тест",
+    "status": "new",
+    "created_at": "2025-09-22T09:09:52.928Z",
+    "updated_at": "2025-09-22T09:09:52.928Z"
+  }
+},
+{
+  "model": "menu.order",
+  "pk": 2,
+  "fields": {
+    "name": "Yersultan Tulemis",
+    "phone": "7776442004",
+    "address": "33125\nTurquoise Lane",
+    "comment": "",
+    "status": "new",
+    "created_at": "2025-09-22T09:10:12.674Z",
+    "updated_at": "2025-09-22T09:10:12.674Z"
+  }
+},
+{
+  "model": "menu.order",
+  "pk": 3,
+  "fields": {
+    "name": "ерс",
+    "phone": "87776442004",
+    "address": "33125\nTurquoise Lane",
+    "comment": "тест",
+    "status": "new",
+    "created_at": "2025-09-22T09:39:11.915Z",
+    "updated_at": "2025-09-22T09:39:11.915Z"
+  }
+},
+{
+  "model": "menu.order",
+  "pk": 4,
+  "fields": {
+    "name": "Yersultan Tulemis",
+    "phone": "87776442004",
+    "address": "33125\nTurquoise Lane",
+    "comment": "",
+    "status": "new",
+    "created_at": "2025-09-22T09:39:55.581Z",
+    "updated_at": "2025-09-22T09:39:55.581Z"
+  }
+},
+{
+  "model": "menu.order",
+  "pk": 5,
+  "fields": {
+    "name": "тест",
+    "phone": "87776442004",
+    "address": "тест",
+    "comment": "",
+    "status": "new",
+    "created_at": "2025-09-22T09:44:42.555Z",
+    "updated_at": "2025-09-22T09:44:42.555Z"
+  }
+},
+{
+  "model": "menu.order",
+  "pk": 6,
+  "fields": {
+    "name": "Yersultan Tulemis",
+    "phone": "87776442004",
+    "address": "Turquoise Lane",
+    "comment": "",
+    "status": "new",
+    "created_at": "2025-09-22T09:45:11.842Z",
+    "updated_at": "2025-09-22T09:45:11.842Z"
+  }
+},
+{
+  "model": "menu.order",
+  "pk": 7,
+  "fields": {
+    "name": "тест3",
+    "phone": "+77776442004",
+    "address": "33125\nTurquoise Lane",
+    "comment": "",
+    "status": "new",
+    "created_at": "2025-09-22T09:46:40.530Z",
+    "updated_at": "2025-09-22T09:46:40.530Z"
+  }
+},
+{
+  "model": "menu.order",
+  "pk": 8,
+  "fields": {
+    "name": "Yersultan Tulemis",
+    "phone": "87776442004",
+    "address": "33125\nTurquoise Lane",
+    "comment": "",
+    "status": "new",
+    "created_at": "2025-09-22T09:48:23.827Z",
+    "updated_at": "2025-09-22T09:48:23.827Z"
+  }
+},
+{
+  "model": "menu.orderitem",
+  "pk": 10,
+  "fields": {
+    "order": 8,
+    "menu_item": 4,
+    "quantity": 1,
+    "price_at_time": "1800.00"
+  }
+}
+]
