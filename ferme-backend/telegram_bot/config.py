@@ -1,8 +1,12 @@
-# Токен вашего бота (получите его у @BotFather)
-BOT_TOKEN = '8290586832:AAFJpj505BXi5AgFkokeDTFdXnml7H9rGUg'
+import os
+from dotenv import load_dotenv
 
-# ID чата или группы, куда будут отправляться заказы
-ORDERS_CHAT_ID = '-4800275782'
+# Загружаем переменные окружения из файла .env
+load_dotenv()
+
+# Получаем значения из переменных окружения
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+ORDERS_CHAT_ID = os.getenv('ORDERS_CHAT_ID')
 
 # Шаблон сообщения для нового заказа
 ORDER_TEMPLATE = """
