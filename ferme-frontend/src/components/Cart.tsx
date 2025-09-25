@@ -8,7 +8,7 @@ interface CartProps {
 
 export default function Cart({ isOpen, onClose }: CartProps) {
   const navigate = useNavigate();
-  const { cart, removeFromCart, clearCart, total, incrementQuantity, decrementQuantity } = useCart();
+  const { cart, removeFromCart, total, incrementQuantity, decrementQuantity } = useCart();
 
   return (
     <>

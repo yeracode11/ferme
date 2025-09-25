@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import type { FC } from "react";
+import { createPortal } from "react-dom";
 import { useCart } from "../context/CartContext";
 import type { MenuItem } from "../api/menu";
 
@@ -11,21 +13,28 @@ const MenuItemModal: FC<MenuItemModalProps> = ({ item, onClose }) => {
   const { cart, addToCart, incrementQuantity, decrementQuantity } = useCart();
   const cartItem = cart.find((cartItem) => cartItem.id === item.id);
 
-  return (
-    <>
-      {/* Затемненный фон */}
+  // Escape закрывает модалку
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [onClose]);
+
+  const modalContent = (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Затемнённый фон */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-10"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            onClose();
-          }
-        }}
+        className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+        onClick={onClose}
       />
 
       {/* Модальное окно */}
-      <div 
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-4 md:p-6 z-50 w-[95%] max-w-2xl max-h-[90vh] overflow-y-auto"
+      <div
+        className="relative bg-white rounded-2xl p-4 md:p-6 w-[95%] max-w-2xl max-h-[90vh] overflow-y-auto z-10"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Кнопка закрытия */}
@@ -33,8 +42,19 @@ const MenuItemModal: FC<MenuItemModalProps> = ({ item, onClose }) => {
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
 
@@ -89,7 +109,7 @@ const MenuItemModal: FC<MenuItemModalProps> = ({ item, onClose }) => {
             <div className="bg-gray-50 rounded-lg p-4">
               <h3 className="font-semibold mb-2">Информация о блюде:</h3>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li>• Время приготовления: 15-20 минут</li>
+                <li>• Все блюда по 600-700гр с гарниром</li>
                 <li>• Можно заказать с собой</li>
                 <li>• {item.available ? "В наличии" : "Нет в наличии"}</li>
               </ul>
@@ -97,7 +117,12 @@ const MenuItemModal: FC<MenuItemModalProps> = ({ item, onClose }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
+  );
+
+  return createPortal(
+    modalContent,
+    document.getElementById("modal-root") || document.body
   );
 };
 
