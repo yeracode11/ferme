@@ -6,17 +6,30 @@ import { useCart } from "../context/CartContext";
 interface OrderForm {
   name: string;
   phone: string;
-  address: string;
+  floor: string; // "1" | "2"
+  room: string;  // например, "101"
   comment?: string;
 }
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
   const { cart, total, clearCart } = useCart();
+  const floors = ["1", "2", "3", "4", "5", "6", "7"];
+  const roomsByFloor: Record<string, string[]> = {
+    // Начинаем с 100 и 200
+    "1": Array.from({ length: 17 }, (_, i) => `${100 + i}`), // 100–116
+    "2": Array.from({ length: 25 }, (_, i) => `${200 + i}`),  // 200–210
+    "3": Array.from({ length: 25 }, (_, i) => `${300 + i}`),  // 300–310
+    "4": Array.from({ length: 25 }, (_, i) => `${400 + i}`),  // 400–410
+    "5": Array.from({ length: 25 }, (_, i) => `${500 + i}`),  // 500–510
+    "6": Array.from({ length: 25 }, (_, i) => `${600 + i}`),  // 600–610
+    "7": Array.from({ length: 9 }, (_, i) => `${700 + i}`),  // 700–710
+  };
   const [formData, setFormData] = useState<OrderForm>({
     name: "",
     phone: "",
-    address: "",
+    floor: floors[0],
+    room: roomsByFloor["1"][0],
     comment: "",
   });
 
@@ -33,10 +46,11 @@ const CheckoutPage = () => {
 
       // Формируем данные заказа для API
       // Преобразуем цену в строку, так как бэкенд ожидает строку
+      const addressStr = `БЦ Quorum, ${formData.floor} этаж, ${formData.room} кабинет`;
       const orderData = {
         name: formData.name,
         phone: formData.phone,
-        address: formData.address,
+        address: addressStr,
         comment: formData.comment || "",
         status: "new",
         items: cart.map(item => ({
@@ -175,19 +189,44 @@ const CheckoutPage = () => {
               />
             </div>
 
+            {/* Адрес доставки как выпадающие списки */}
             <div>
-              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
-                Адрес доставки *
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Адрес доставки
               </label>
-              <textarea
-                id="address"
-                required
-                value={formData.address}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                rows={2}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                placeholder="Укажите адрес доставки"
-              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="floor" className="block text-xs text-gray-600 mb-1">Этаж</label>
+                  <select
+                    id="floor"
+                    value={formData.floor}
+                    onChange={(e) => {
+                      const newFloor = e.target.value;
+                      const firstRoom = roomsByFloor[newFloor]?.[0] || "";
+                      setFormData({ ...formData, floor: newFloor, room: firstRoom });
+                    }}
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  >
+                    {floors.map((f) => (
+                      <option key={f} value={f}>{f} этаж</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="room" className="block text-xs text-gray-600 mb-1">Кабинет</label>
+                  <select
+                    id="room"
+                    value={formData.room}
+                    onChange={(e) => setFormData({ ...formData, room: e.target.value })}
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  >
+                    {roomsByFloor[formData.floor].map((room) => (
+                      <option key={room} value={room}>{room} кабинет</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <p className="mt-2 text-sm text-gray-500">БЦ Quorum</p>
             </div>
 
             <div>

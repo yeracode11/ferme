@@ -17,14 +17,6 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Медиафайлы
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-# Static files
-STATIC_URL = "static/"
-
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -33,10 +25,12 @@ STATIC_URL = "static/"
 SECRET_KEY = 'django-insecure-nu6p0)6=ifxxk$1^x=%@e8ae1z##rl8qo5p%towz&&#v7$y(1d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://fermi-production-2dd4.up.railway.app",
+]
 
 # Application definition
 
@@ -57,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -91,10 +86,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
-if os.getenv("DATABASE_URL"):  # если Railway или есть переменная
+if os.getenv("DATABASE_URL"):
     DATABASES = {
-        'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
+        "default": dj_database_url.config(
+            default=os.environ.get("DATABASE_URL"),
+            conn_max_age=600,
+            ssl_require=False
+        )
     }
+    # Явно вырубаем SSL
+    DATABASES["default"]["OPTIONS"] = {"sslmode": "disable"}
+
 
 else:
     DATABASES = {
@@ -140,13 +142,30 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# Медиафайлы
+MEDIA_URL = "https://fermi.kz/media/"
+MEDIA_ROOT = None
+
+# Static files
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# FTP доступ к твоему хостингу (Plesk)
+FTP_HOST = "185.234.114.50"
+FTP_USER = "eraco237"   # логин FTP
+FTP_PASSWORD = "Erasoft04"
+FTP_MEDIA_LOCATION = "/httpdocs/media"  # путь на сервере Plesk
+
+# Django Storages
+DEFAULT_FILE_STORAGE = "config.storage_backends.MediaStorage"

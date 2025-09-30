@@ -7,3 +7,5 @@ django-cors-headers
 django-jazzmin
 Pillow            
 python-telegram-bot
+whitenoise
+django-storages

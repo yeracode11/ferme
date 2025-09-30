@@ -7,7 +7,7 @@ export interface MenuItem {
   image?: string
 }
 
-const API_URL = "http://127.0.0.1:8000/api/items/";
+const API_URL = "https://fermi-production-2dd4.up.railway.app/api/items/";
 
 export async function fetchMenu(): Promise<MenuItem[]> {
   const response = await fetch(API_URL);

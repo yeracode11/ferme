@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { MenuItem } from "../api/menu";
 
 interface CartItem extends MenuItem {
@@ -18,7 +18,26 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const STORAGE_KEY = "ferme_cart_v1";
+
+  // Инициализация корзины из localStorage
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? (JSON.parse(saved) as CartItem[]) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Сохранение корзины при каждом изменении
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    } catch {
+      // игнорируем ошибки квоты/доступа
+    }
+  }, [cart]);
 
   const addToCart = (item: MenuItem) => {
     setCart((prev) => {

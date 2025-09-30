@@ -30,7 +30,7 @@ export default function Menu() {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/items/")
+    fetch("https://fermi-production-2dd4.up.railway.app/api/items/")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Ошибка загрузки меню");

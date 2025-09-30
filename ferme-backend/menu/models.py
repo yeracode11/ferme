@@ -11,7 +11,7 @@ class MenuItem(models.Model):
     description = models.TextField("Описание", blank=True, default="")
     category = models.CharField("Категория", max_length=50, choices=CATEGORY_CHOICES, default='second')
     price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
-    image = models.ImageField("Изображение", upload_to="menu_images/", null=True, blank=True)
+    image = models.ImageField("Изображение", upload_to="", null=True, blank=True)
     available = models.BooleanField("Доступно", default=True)
     created_at = models.DateTimeField("Дата создания", auto_now_add=True)
     updated_at = models.DateTimeField("Дата обновления", auto_now=True)

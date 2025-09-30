@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/image.png";
+import { useCart } from "../context/CartContext";
 
 interface HeaderProps {
   showCart: boolean;
@@ -9,10 +10,12 @@ interface HeaderProps {
 
 export default function Header({ showCart, setShowCart }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { cart } = useCart();
+  const itemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="relative">
-      <header className="flex justify-between items-center bg-blue-600 text-white p-4">
+      <header className="fixed top-0 left-0 right-0 flex justify-between items-center bg-blue-600 text-white p-4 z-40">
         {/* Бургер меню */}
         <button
           className="flex flex-col justify-center items-center w-10 h-10 space-y-1"
@@ -32,7 +35,7 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
         {/* Кнопка корзины */}
         <button
           onClick={() => setShowCart(!showCart)}
-          className="bg-white text-blue-600 p-2 rounded-lg hover:bg-gray-100 transition"
+          className="relative bg-white text-blue-600 p-2 rounded-lg hover:bg-gray-100 transition"
         >
           {showCart ? (
             // крестик
@@ -59,8 +62,16 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
               </svg>
             )}
+          {itemsCount > 0 && (
+            <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-red-600 text-white text-xs leading-5 text-center">
+              {itemsCount}
+            </span>
+          )}
         </button>
       </header>
+
+      {/* Отступ, чтобы контент не заезжал под фиксированный header */}
+      <div className="h-16" />
 
       {/* Оверлей */}
       {menuOpen && (
