@@ -35,6 +35,8 @@ class Order(models.Model):
     name = models.CharField("Имя клиента", max_length=255)
     phone = models.CharField("Телефон", max_length=20)
     address = models.TextField("Адрес доставки")
+    floor = models.CharField("Этаж", max_length=10, blank=True)
+    room = models.CharField("Кабинет", max_length=20, blank=True)
     comment = models.TextField("Комментарий к заказу", blank=True)
     status = models.CharField("Статус", max_length=20, choices=STATUS_CHOICES, default='new')
     created_at = models.DateTimeField("Дата создания", auto_now_add=True)

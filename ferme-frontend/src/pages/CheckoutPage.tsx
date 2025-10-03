@@ -51,6 +51,8 @@ const CheckoutPage = () => {
         name: formData.name,
         phone: formData.phone,
         address: addressStr,
+        floor: formData.floor,
+        room: formData.room,
         comment: formData.comment || "",
         status: "new",
         items: cart.map(item => ({

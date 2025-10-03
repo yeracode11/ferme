@@ -9,9 +9,9 @@ class MenuItemAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'phone', 'created_at', 'status']
+    list_display = ['id', 'name', 'phone', 'floor', 'room', 'created_at', 'status']
     list_filter = ['status', 'created_at']
-    search_fields = ['name', 'phone', 'address']
+    search_fields = ['name', 'phone', 'address', 'floor', 'room']
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
