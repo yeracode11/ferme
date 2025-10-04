@@ -63,7 +63,8 @@ const CheckoutPage = () => {
       };
 
       // Отправляем заказ на сервер
-      const response = await fetch('http://127.0.0.1:8000/api/orders/', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://fermi-production-2dd4.up.railway.app';
+      const response = await fetch(`${apiUrl}/api/orders/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
