@@ -34,7 +34,7 @@ class Order(models.Model):
 
     name = models.CharField("Имя клиента", max_length=255)
     phone = models.CharField("Телефон", max_length=20)
-    address = models.TextField("Адрес доставки")
+    address = models.TextField("Адрес доставки", blank=True, null=True)
     floor = models.CharField("Этаж", max_length=10, blank=True)
     room = models.CharField("Кабинет", max_length=20, blank=True)
     comment = models.TextField("Комментарий к заказу", blank=True)

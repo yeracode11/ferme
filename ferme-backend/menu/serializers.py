@@ -10,6 +10,9 @@ class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = ['menu_item', 'quantity', 'price_at_time']
+        extra_kwargs = {
+            'price_at_time': {'required': False}
+        }
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True)
