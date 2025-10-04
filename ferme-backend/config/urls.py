@@ -4,11 +4,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import JsonResponse
 from django.core.management import call_command
+from django.views.decorators.csrf import csrf_exempt
 import os
 
 def health_check(request):
     return JsonResponse({"status": "ok", "message": "Ferme API is running"})
 
+@csrf_exempt
 def migrate_endpoint(request):
     if request.method == 'POST':
         try:
